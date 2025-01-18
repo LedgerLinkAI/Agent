@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEDGER LINK AI</title>
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Courier New';
+            color: #0f0;
+            background: #000;
+            overflow: auto;
+        }
+
+        #landing-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #join-button {
+            padding: 20px 40px;
+            font-size: 24px;
+            background: transparent;
+            color: #0f0;
+            border: 2px solid #0f0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        #join-button:hover {
+            background: #0f0;
+            color: #000;
+        }
+
+        #main-page {
+            display: none;
+            height: 100vh;
+            padding: 20px;
+            z-index: 1010;   
+            position: relative;  
+        }
+
+        #header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            z-index: 1;
+            position: relative;
+        }
+
+        #logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        #logo img {
+            height: 30px; /* Sesuaikan ukuran logo */
+            margin-right: 10px; /* Jarak antara logo dan teks */
+        }
+
+        #social-links a {
+            color: #0f0;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 18px;
+        }
+
+        #content {
+            text-align: center;
+            margin-top: 100px;
+            z-index: 1;
+            position: relative;
+        }
+
+        .button {
+            padding: 15px 30px;
+            font-size: 20px;
+            background: transparent;
+            color: #0f0;
+            border: 2px solid #0f0;
+            cursor: pointer;
+            margin: 20px;
+            transition: all 0.3s;
+        }
+
+        .button:hover {
+            background: #0f0;
+            color: #000;
+        }
+
+        #user-info {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            font-size: 16px;
+            z-index: 1;
+        }
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .text-container {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #0f0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            display: none;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1;
+            position: relative;
+        }
+
+        
+
+        .audio-player {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+    
+
+        #volume-control::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 5px;
+            background: #0f0;
+            border: none;
+            border-radius: 3px;
+        }
+
+        #volume-control::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            border: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #0f0;
+            margin-top: -5px;
+            cursor: pointer;
+        }
+
+        #loading-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .loading-bar {
+            width: 300px;
+            height: 20px;
+            border: 2px solid #0f0;
+            margin-top: 20px;
+        }
+
+        .loading-progress {
+            width: 75%;
+            height: 100%;
+            background: #0f0;
+            animation: pulse 2s infinite;
+        }
+
+        .glitch {
+            animation: glitch 1s linear infinite;
+        }
+
+        @keyframes glitch {
+            2%, 64% {
+                transform: translate(2px,0) skew(0deg);
+            }
+            4%, 60% {
+                transform: translate(-2px,0) skew(0deg);
+            }
+            62% {
+                transform: translate(0,0) skew(5deg);
+            }
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div id="landing-page">
+        <button id="join-button" class="glitch">Open The Future Of AI</button>
+    </div>
+
+    <div id="main-page">
+        <div id="header">
+            <div id="logo">
+                <img src="assets/LedgerLink.webp" alt="Logo LedgerLink AI" id="logo-image">
+                LEDGER LINK AI
+            </div>
+            <div id="social-links">
+                <a href="https://t.me/zorixAI" target="_blank">TELEGRAM</a>
+                <a href="https://x.com/zorixai99066" target="_blank">TWITTER</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h2 class="glitch">NEXT AI AGENT ON SUI</h2>
+            <button id="initialize-button" class="button">INITIALIZE YOUR IP</button>
+            <br>
+            <button id="ai-bot-button" class="button">MEET LEDGER LINK</button>
+            
+            <div class="text-container" id="bot-text-container">
+                <p>Welcome to LEDGER LINK AI Bot System!</p>
+                <p>Current Phase:</p>
+                <ul style="list-style-type: none; padding: 0;">
+                    <li>✓ Social Media Created</li>
+                    <li>✓ $LDGLK Ticker Created</li>
+                    <li>✓ Launching Phase </li>
+                    <li>⋯ LedgerTheBot (In Progress)</li>
+                    <li>⋯ Wallet Tracker (In Progress)</li>
+                    <li>⋯ $LDGLK Airdrop (Coming Soon)</li>
+                    <li>⋯ SUI Wallet Dapps (Coming Soon)</li>
+                    <li>⋯ Token Launchpad (Coming Soon)</li>
+                    
+                </ul>
+                <p style="margin-top: 15px;">System Status: Development Phase - 35% Complete</p>
+                <p>Join Telegram for Project Updates</p>
+                <p style="margin-top: 15px;">Developed BY @mecoderdev</p>
+            </div>
+        </div>
+
+        <div id="user-info"></div>
+    </div>
+
+    <div id="loading-screen">
+        <h2></h2>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+        <h3></h3>
+    </div>
+
+    <div id="music-controls">
+        <div class="audio-player">
+            <button id="toggle-music" class="button">▶️ PLAY</button>
+            <input type="range" id="volume-control" min="0" max="100" value="50">
+            <span id="music-status">Volume: 50%</span>
+        </div>
+    </div>
+
+    <audio id="background-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <canvas id="matrix"></canvas>
+
+    <script>
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        const music = document.getElementById('background-music');
+        const musicBtn = document.getElementById('toggle-music');
+        const volumeControl = document.getElementById('volume-control');
+        const musicStatus = document.getElementById('music-status');
+        let isMusicPlaying = false;
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const nums = '01';
+        const fontSize = 14;
+        const columns = canvas.width/fontSize;
+        const rainDrops = Array(Math.floor(columns)).fill(canvas.height);
+        const speeds = Array(Math.floor(columns)).fill(0).map(() => 
+            Math.random() * 5 + 5
+        );
+        const opacity = Array(Math.floor(columns)).fill(0).map(() => 
+            Math.random() * 0.5 + 0.5
+        );
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            for(let i = 0; i < rainDrops.length; i++) {
+                const text = nums[Math.floor(Math.random() * nums.length)];
+                ctx.fillStyle = `rgba(0, 255, 0, ${opacity[i]})`;
+                ctx.font = fontSize + 'px Courier New';
+                
+                const x = i * fontSize;
+                const y = rainDrops[i];
+                ctx.fillText(text, x, y);
+
+                rainDrops[i] += speeds[i];
+
+                if(rainDrops[i] > canvas.height) {
+                    rainDrops[i] = 0;
+                    speeds[i] = Math.random() * 5 + 5;
+                    opacity[i] = Math.random() * 0.5 + 0.5;
+                }
+            }
+        }
+
+        setInterval(draw, 50);
+
+        // Set initial volume
+        music.volume = 0.5;
+
+        // Volume control
+        volumeControl.addEventListener('input', (e) => {
+            const volume = e.target.value / 100;
+            music.volume = volume;
+            musicStatus.textContent = `Volume: ${e.target.value}%`;
+        });
+
+        // Improved music toggle
+        musicBtn.addEventListener('click', async () => {
+            try {
+                if (!isMusicPlaying) {
+                    await music.play();
+                    musicBtn.textContent = '⏸️ PAUSE';
+                    isMusicPlaying = true;
+                } else {
+                    music.pause();
+                    musicBtn.textContent = '▶️ PLAY';
+                    isMusicPlaying = false;
+                }
+            } catch (err) {
+                console.error('Audio playback failed:', err);
+                alert('Click play button again to start the music');
+            }
+        });
+
+        // Page navigation
+        document.getElementById('join-button').addEventListener('click', () => {
+            document.getElementById('landing-page').style.display = 'none'; // Hiding the landing page
+            document.getElementById('main-page').style.display = 'block';  // Showing the main page
+        });
+
+        // Initialize button functionality
+        document.getElementById('initialize-button').addEventListener('click', async () => {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                const ip = data.ip;
+
+                const locationResponse = await fetch(`https://ipapi.co/${ip}/json/`);
+                const locationData = await locationResponse.json();
+
+                document.getElementById('user-info').innerHTML = `
+                    IP: ${ip}<br>
+                    Location: ${locationData.city}, ${locationData.country_name}<br>
+                    ISP: ${locationData.org}
+                `;
+            } catch (error) {
+                document.getElementById('user-info').innerHTML = 'ERROR: Unable to retrieve system information';
+            }
+        });
+
+        // AI Bot button functionality
+        document.getElementById('ai-bot-button').addEventListener('click', () => {
+            const loadingScreen = document.getElementById('loading-screen');
+            const textContainer = document.getElementById('bot-text-container');
+            
+            loadingScreen.style.display = 'flex';
+            
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+                textContainer.style.display = 'block';
+                
+                typeWriter(textContainer);
+            }, 3000);
+        });
+
+        function typeWriter(element) {
+            element.style.opacity = '0';
+            setTimeout(() => {
+                element.style.opacity = '1';
+                element.style.transition = 'opacity 1s ease-in';
+            }, 100);
+        }
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            for(let i = 0; i < rainDrops.length; i++) {
+                rainDrops[i] = Math.random() * canvas.height;
+            }
+        });
+    </script>
+</body>
+</html>
